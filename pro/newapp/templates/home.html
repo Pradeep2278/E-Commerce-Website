@@ -1,0 +1,33 @@
+{% extends 'layouts/main.html'%}
+{% block title %}
+    Home | Ekart
+{% endblock title%}
+
+{% block content %}
+{% include 'inc/slider.html' %}
+  <div class="container" style="margin-top:70px;">
+    <div class="row">
+        <div class="col-12">
+          <h4 class="mb-3">Offers</h4>
+          <hr style="border-color:antiquewhite">
+            {% for item in products %}
+                <div class="col-md-4 col-log-3">
+                    <div class="card my-3">
+                        <img src="{{item.Product_image.url}}" class="card-Image-top" alt="Catagories">
+                        <a href="{% url 'product_details' item.Category.name item.name %}">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ item.name }}</h5>
+                            <p class="card-text">
+                                <span class="float-start old_price"><s>Rs.{{ item.Own_price | stringformat:'d'}}</s></span>
+                                <span class="float-end new_price">Rs.{{ item.Selling_price | stringformat:'d'}}</span>
+                            </p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+  </div>
+    
+{% endblock content%}
